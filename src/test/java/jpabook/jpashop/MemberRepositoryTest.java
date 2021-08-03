@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 class MemberRepositoryTest {
 
-    @Autowired MemberRepository memberRepository;
+//    @Autowired MemberRepository memberRepository;
 
     @Test
     //Transactional이 TEST에 있으면 끝나고 롤백을 해버린다.
