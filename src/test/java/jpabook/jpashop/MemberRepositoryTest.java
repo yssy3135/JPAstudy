@@ -17,11 +17,11 @@ class MemberRepositoryTest {
 
 //    @Autowired MemberRepository memberRepository;
 
-    @Test
+//    @Test
     //Transactional이 TEST에 있으면 끝나고 롤백을 해버린다.
-    @Transactional
+//    @Transactional
     //롤백을 false하면 commit
-    @Rollback(false)
+//    @Rollback(false)
 //    public void testMember() throws Exception{
 //        //given
 //        Member member = new Member();

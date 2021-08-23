@@ -1,4 +1,4 @@
-package jpabook.jpashop;
+package jpabook.jpashop.Service;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
@@ -20,6 +20,7 @@ public class MemberService {
     //스프링이 스프링Bean에 등록되어있는 MemberRepository를 injection => 필드 인젝션
 
     // final을 쓰면  컴파일 시점에 체크를 할 수 있다. (추천)
+    @Autowired
     private final MemberRepository memberRepository;
 
     //생성자 injection (권장)
