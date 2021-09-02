@@ -27,6 +27,46 @@ public class MemberApiController {
      * 결론
      * - API 요청 스펙에 맞추어 별도의 DTO를 파라미터로 받는다.
      */
+
+
+    @GetMapping("/api/v1/members")
+    public List<Member> memberV1(){
+
+        return memberService.findMembers();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result memberV2(){
+        List<Member> findMembers = memberService.findMembers();
+
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+
+        return new Result(collect);
+    }
+
+
+    /**
+     * 그냥 내보내면 JSON 배열 타입으로 내보내지기 때문에
+     * 유연성이 확 떨어지게 된다.
+     * 그러므로 한번 감싸서 내보내게 된다.
+     * @param <T>
+     */
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDto {
+        private String name;
+    }
+
+
+
     @PostMapping("/api/v1/members")
     public CreateMemberResponse saveMemberV1(@RequestBody @Valid Member member) {
         Long id = memberService.join(member);
