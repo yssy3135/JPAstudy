@@ -43,6 +43,18 @@ public class MemberApiController {
         return new CreateMemberResponse(id);
     }
 
+    @PutMapping("/api/v2/members/{id}")
+    public UpdateMemberResponse updateMemberV2(
+            @PathVariable("id") Long id ,
+            @RequestBody @Valid UpdateMemberRequest request){
+
+        memberService.update(id,request.getName());
+        Member findMember = memberService.findOne(id);
+
+
+        return new UpdateMemberResponse(findMember.getId(), findMember.getName());
+    }
+
 
     /**
      * 조회 V1: 응답 값으로 엔티티를 직접 외부에 노출한다.
@@ -58,6 +70,18 @@ public class MemberApiController {
      */
 
     @Data
+    static class UpdateMemberRequest {
+        private String name;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class UpdateMemberResponse{
+        private Long id;
+        private String name;
+    }
+
+    @Data
     static class CreateMemberRequest {
         private String name;
     }
@@ -70,4 +94,5 @@ public class MemberApiController {
             this.id = id;
         }
     }
+
 }
